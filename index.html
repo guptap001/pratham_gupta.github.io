@@ -1,162 +1,1191 @@
-import React from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pratham Gupta | Data Engineer & Cloud Data Architect</title>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Google Fonts: JetBrains Mono & Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 
-export default function Portfolio() {
-  const scrollToContact = (e) => {
-    e.preventDefault();
-    const contactElement = document.getElementById("contact");
-    if (contactElement) {
-      contactElement.scrollIntoView({ behavior: "smooth" });
+  <style>
+    /* ============================================================
+       01. COLOR PALETTE & CSS VARIABLES (NEON CYBER DATA THEME)
+       ============================================================ */
+    :root {
+      --bg-dark: #050816;
+      --card-bg: #0f172a;
+      --card-hover: #1e293b;
+      --border-color: #1e293b;
+      --border-glow: #00e5ff;
+      --primary: #38bdf8;
+      --cyan-glow: #00e5ff;
+      --accent-green: #22c55e;
+      --accent-orange: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-sans: 'Inter', sans-serif;
     }
-  };
 
-  return (
-    <div className="min-h-screen bg-[#070b14] text-white font-sans px-6 py-12 md:px-16">
-      
-      {/* ================= HERO SECTION ================= */}
-      <header className="max-w-4xl mx-auto text-center space-y-6 pt-10 pb-12">
-        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-[#38bdf8]">
-          PRATHAM GUPTA
-        </h1>
-        
-        <p className="text-lg md:text-xl text-gray-300 font-mono">
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    /* Background Particle Canvas */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* Section Utility Headers */
+    .section-title {
+      font-family: var(--font-mono);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--cyan-glow);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    .section-title i {
+      color: var(--primary);
+    }
+
+    /* Buttons & Interactive Elements */
+    .btn-cyber {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1.5rem;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.1);
+    }
+
+    .btn-cyber:hover {
+      background: var(--primary);
+      color: var(--bg-dark);
+      box-shadow: 0 0 20px var(--cyan-glow);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================================
+       02. HERO SECTION - CYBER DASHBOARD
+       ============================================================ */
+    .hero-dashboard {
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2.5rem;
+      margin-bottom: 4rem;
+      position: relative;
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.05);
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+
+    .system-status {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent-green);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .status-pulse {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-green);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.2); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .hero-content {
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #ffffff 0%, var(--primary) 50%, var(--cyan-glow) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-desc {
+      max-width: 650px;
+      margin: 0 auto 2rem auto;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* Mini Pipeline Hero Animation */
+    .mini-pipeline-bar {
+      background: rgba(5, 8, 22, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+
+    .mini-node {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .mini-node i {
+      color: var(--cyan-glow);
+    }
+
+    .flow-line {
+      width: 40px;
+      height: 2px;
+      background: var(--border-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .flow-line::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, var(--cyan-glow), transparent);
+      animation: lineFlow 1.5s infinite linear;
+    }
+
+    @keyframes lineFlow {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    /* ============================================================
+       03. LIVE ANIMATED DATA PIPELINE (END-TO-END DATA FLOW)
+       ============================================================ */
+    .pipeline-section {
+      margin-bottom: 4rem;
+    }
+
+    .pipeline-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2rem 1rem;
+      overflow-x: auto;
+      position: relative;
+    }
+
+    .pipeline-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 110px;
+      z-index: 2;
+    }
+
+    .pipeline-box {
+      width: 80px;
+      height: 80px;
+      background: rgba(5, 8, 22, 0.9);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .pipeline-box i {
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+
+    .pipeline-box span {
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: var(--font-mono);
+    }
+
+    .pipeline-box:hover {
+      border-color: var(--cyan-glow);
+      box-shadow: 0 0 20px var(--cyan-glow);
+      transform: translateY(-5px);
+    }
+
+    .pipeline-connector {
+      flex: 1;
+      height: 3px;
+      background: var(--border-color);
+      position: relative;
+      min-width: 30px;
+    }
+
+    .data-packet {
+      position: absolute;
+      top: -3px;
+      left: 0;
+      width: 9px;
+      height: 9px;
+      background: var(--cyan-glow);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--cyan-glow);
+      animation: packetFlow 2s infinite linear;
+    }
+
+    @keyframes packetFlow {
+      0% { left: 0%; }
+      100% { left: 100%; }
+    }
+
+    .conn-1 .data-packet { animation-delay: 0s; }
+    .conn-2 .data-packet { animation-delay: 0.3s; }
+    .conn-3 .data-packet { animation-delay: 0.6s; }
+    .conn-4 .data-packet { animation-delay: 0.9s; }
+    .conn-5 .data-packet { animation-delay: 1.2s; }
+    .conn-6 .data-packet { animation-delay: 1.5s; }
+
+    /* ============================================================
+       04. TECH STACK MARQUEE
+       ============================================================ */
+    .marquee-container {
+      width: 100%;
+      overflow: hidden;
+      background: rgba(15, 23, 42, 0.5);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 0;
+      margin-bottom: 4rem;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .marquee-track {
+      display: inline-flex;
+      gap: 2rem;
+      animation: marquee 25s linear infinite;
+    }
+
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      background: var(--card-bg);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+    }
+
+    .marquee-item i {
+      color: var(--cyan-glow);
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ============================================================
+       05. METRICS & STATISTICS SECTION
+       ============================================================ */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--cyan-glow);
+      font-family: var(--font-mono);
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ============================================================
+       06. SKILLS MATRIX WITH HOVER GLOW
+       ============================================================ */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .skill-category {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .skill-category:hover {
+      border-color: var(--cyan-glow);
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+      transform: translateY(-4px);
+    }
+
+    .skill-category-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .skill-tag {
+      background: rgba(5, 8, 22, 0.8);
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+    }
+
+    /* ============================================================
+       07. ANIMATED TERMINAL & ABOUT SECTION
+       ============================================================ */
+    .about-terminal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    @media (max-width: 900px) {
+      .about-terminal-grid { grid-template-columns: 1fr; }
+    }
+
+    .about-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.8rem;
+    }
+
+    .about-box h3 {
+      font-size: 1.4rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .about-box p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      font-size: 0.98rem;
+    }
+
+    .terminal-window {
+      background: #02040a;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      overflow: hidden;
+      font-family: var(--font-mono);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    }
+
+    .terminal-bar {
+      background: #0b1120;
+      padding: 0.6rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .terminal-title {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .terminal-body {
+      padding: 1.2rem;
+      font-size: 0.85rem;
+      height: 220px;
+      overflow-y: auto;
+    }
+
+    .term-line {
+      margin-bottom: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .term-prompt { color: var(--cyan-glow); }
+    .term-cmd { color: var(--text-main); }
+    .term-success { color: var(--accent-green); }
+
+    /* ============================================================
+       08. WORK EXPERIENCE TIMELINE
+       ============================================================ */
+    .timeline-container {
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--cyan-glow) 0%, var(--border-color) 100%);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2rem;
+      top: 4px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--bg-dark);
+      border: 2px solid var(--cyan-glow);
+      box-shadow: 0 0 10px var(--cyan-glow);
+    }
+
+    .timeline-content {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+
+    .timeline-date {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--cyan-glow);
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-role {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .timeline-company {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.8rem;
+    }
+
+    .timeline-bullets {
+      padding-left: 1.2rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .timeline-bullets li {
+      margin-bottom: 0.4rem;
+    }
+
+    /* ============================================================
+       09. DASHBOARD PROJECT CARDS & SVG ARCHITECTURE
+       ============================================================ */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover {
+      border-color: var(--cyan-glow);
+      box-shadow: 0 0 25px rgba(0, 229, 255, 0.12);
+      transform: translateY(-5px);
+    }
+
+    .project-status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+
+    .status-online {
+      color: var(--accent-green);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .project-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 1.2rem;
+    }
+
+    /* Architecture Diagram Box */
+    .arch-diagram {
+      background: rgba(5, 8, 22, 0.9);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.2rem;
+      text-align: center;
+    }
+
+    .arch-diagram svg {
+      width: 100%;
+      height: auto;
+      max-height: 80px;
+    }
+
+    /* ============================================================
+       10. GITHUB ACTIVITY WIDGET
+       ============================================================ */
+    .github-widget {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.8rem;
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .github-heatmap-img {
+      width: 100%;
+      max-width: 800px;
+      border-radius: 6px;
+      margin: 1rem 0;
+      filter: invert(0.9) hue-rotate(180deg);
+    }
+
+    /* ============================================================
+       11. CONTACT & FOOTER SECTION
+       ============================================================ */
+    .contact-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2.5rem;
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .contact-grid {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 2rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    footer span {
+      color: var(--cyan-glow);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BACKGROUND PARTICLE CANVAS -->
+  <canvas id="bg-canvas"></canvas>
+
+  <div class="container">
+
+    <!-- HERO DASHBOARD -->
+    <header class="hero-dashboard">
+      <div class="dashboard-header">
+        <div class="window-controls">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+        </div>
+        <div class="system-status">
+          <div class="status-pulse"></div> SYSTEM STATUS: ONLINE | CLUSTER HEALTH: 100%
+        </div>
+      </div>
+
+      <div class="hero-content">
+        <h1 class="hero-title">Pratham Gupta</h1>
+        <div class="hero-subtitle">
           Data Engineer • Cloud Data Platforms • Distributed Systems
-        </p>
-
-        <p className="text-gray-400 max-w-2xl mx-auto leading-relaxed text-sm md:text-base">
+        </div>
+        <p class="hero-desc">
           Building scalable, high-throughput data pipelines that process millions of records with enterprise reliability and sub-second analytical querying.
         </p>
 
-        {/* Action Buttons */}
-        <div className="flex justify-center items-center gap-4 pt-4">
-          <a
-            href="#contact"
-            onClick={scrollToContact}
-            className="px-6 py-2.5 rounded-lg border border-[#38bdf8] bg-[#0c192e] text-[#38bdf8] font-mono text-sm hover:bg-[#38bdf8] hover:text-black transition-all duration-200"
-          >
-            ✈ Contact Me
-          </a>
-          
-          <a
-            href="https://linkedin.com/in/your-profile"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-2.5 rounded-lg border border-[#38bdf8] bg-[#0c192e] text-[#38bdf8] font-mono text-sm hover:bg-[#38bdf8] hover:text-black transition-all duration-200"
-          >
-            in LinkedIn
-          </a>
+        <div class="hero-actions">
+          <a href="mailto:guptapratham499@gmail.com" class="btn-cyber"><i class="fa-solid fa-paper-plane"></i> Contact Me</a>
+          <a href="https://github.com/guptap001" target="_blank" class="btn-cyber"><i class="fa-brands fa-github"></i> GitHub</a>
+          <a href="https://www.linkedin.com/in/pratham-gupta-b2158b21b" target="_blank" class="btn-cyber"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
         </div>
-      </header>
 
-      {/* ================= TECH STACK BANNER ================= */}
-      <div className="max-w-4xl mx-auto border-t border-b border-gray-800 py-4 my-8 flex flex-wrap justify-around items-center gap-4 text-sm font-mono text-gray-300">
-        <div className="flex items-center gap-2">⚡ Kafka</div>
-        <div className="w-8 h-[1px] bg-gray-700 hidden sm:block"></div>
-        <div className="flex items-center gap-2">🔥 Spark</div>
-        <div className="w-8 h-[1px] bg-gray-700 hidden sm:block"></div>
-        <div className="flex items-center gap-2">❄ Snowflake</div>
-        <div className="w-8 h-[1px] bg-gray-700 hidden sm:block"></div>
-        <div className="flex items-center gap-2">📊 Power BI</div>
+        <!-- Animated Data Flow Line -->
+        <div class="mini-pipeline-bar">
+          <div class="mini-node"><i class="fa-solid fa-bolt"></i> Kafka</div>
+          <div class="flow-line"></div>
+          <div class="mini-node"><i class="fa-solid fa-fire"></i> Spark</div>
+          <div class="flow-line"></div>
+          <div class="mini-node"><i class="fa-solid fa-snowflake"></i> Snowflake</div>
+          <div class="flow-line"></div>
+          <div class="mini-node"><i class="fa-solid fa-chart-column"></i> Power BI</div>
+        </div>
       </div>
+    </header>
 
-      {/* ================= PROJECTS SECTION ================= */}
-      <section className="max-w-5xl mx-auto py-10">
-        <h2 className="text-2xl font-bold mb-8 text-gray-200 font-mono">Projects</h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          
-          {/* Project Card 1 */}
-          <div className="bg-[#0b1329] border border-gray-800 rounded-xl p-6 flex flex-col justify-between space-y-4 hover:border-gray-700 transition-all">
-            <div>
-              <div className="flex justify-between items-center text-xs font-mono mb-3">
-                <span className="text-emerald-400 flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span>
-                  Pipeline Status: Online
-                </span>
-                <span className="text-gray-500">AWS EMR</span>
-              </div>
-              
-              <h3 className="text-xl font-bold text-white mb-2">
-                Distributed Streaming Pipeline
-              </h3>
-              
-              <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                Real-time ingestion engine processing live event streams into S3 and Snowflake with automated Airflow monitoring.
-              </p>
+    <!-- LIVE ANIMATED DATA PIPELINE -->
+    <section class="pipeline-section">
+      <div class="section-title"><i class="fa-solid fa-diagram-project"></i> End-to-End Data Pipeline Architecture</div>
+      <div class="pipeline-container">
 
-              {/* Architecture Diagram Bar */}
-              <div className="bg-[#070b14] border border-gray-800 rounded-lg p-3 text-xs font-mono text-cyan-400 flex justify-between items-center mb-4">
-                <span>Kafka</span>
-                <span className="text-gray-600">———</span>
-                <span>Spark</span>
-                <span className="text-gray-600">———</span>
-                <span>S3</span>
-                <span className="text-gray-600">———</span>
-                <span>Snowflake</span>
-              </div>
-            </div>
-
-            {/* Tech Tags (Repository button removed from here) */}
-            <div className="flex flex-wrap gap-2">
-              <span className="bg-[#111c38] text-gray-300 text-xs font-mono px-3 py-1 rounded">Spark</span>
-              <span className="bg-[#111c38] text-gray-300 text-xs font-mono px-3 py-1 rounded">Kafka</span>
-              <span className="bg-[#111c38] text-gray-300 text-xs font-mono px-3 py-1 rounded">Airflow</span>
-            </div>
-          </div>
-
-          {/* Project Card 2 */}
-          <div className="bg-[#0b1329] border border-gray-800 rounded-xl p-6 flex flex-col justify-between space-y-4 hover:border-gray-700 transition-all">
-            <div>
-              <div className="flex justify-between items-center text-xs font-mono mb-3">
-                <span className="text-emerald-400 flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span>
-                  Status: Active
-                </span>
-                <span className="text-gray-500">ClickHouse</span>
-              </div>
-              
-              <h3 className="text-xl font-bold text-white mb-2">
-                Analytical Store & Ingestion Pipeline
-              </h3>
-              
-              <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                Hybrid relational/columnar pipeline ingesting high-volume event logs into Postgres and syncing to ClickHouse.
-              </p>
-
-              {/* Architecture Diagram Bar */}
-              <div className="bg-[#070b14] border border-gray-800 rounded-lg p-3 text-xs font-mono text-cyan-400 flex justify-between items-center mb-4">
-                <span>API</span>
-                <span className="text-gray-600">———</span>
-                <span>Postgres</span>
-                <span className="text-gray-600">———</span>
-                <span>ClickHouse</span>
-              </div>
-            </div>
-
-            {/* Tech Tags (Repository button removed from here) */}
-            <div className="flex flex-wrap gap-2">
-              <span className="bg-[#111c38] text-gray-300 text-xs font-mono px-3 py-1 rounded">ClickHouse</span>
-              <span className="bg-[#111c38] text-gray-300 text-xs font-mono px-3 py-1 rounded">Postgres</span>
-              <span className="bg-[#111c38] text-gray-300 text-xs font-mono px-3 py-1 rounded">Python</span>
-            </div>
-          </div>
-
+        <div class="pipeline-step">
+          <div class="pipeline-box"><i class="fa-solid fa-database"></i><span>Raw Data</span></div>
         </div>
-      </section>
+        <div class="pipeline-connector conn-1"><div class="data-packet"></div></div>
 
-      {/* ================= CONTACT SECTION ================= */}
-      <section id="contact" className="max-w-4xl mx-auto my-16 text-center py-12 border-t border-gray-800">
-        <h2 className="text-2xl font-bold text-gray-200 font-mono mb-4">Get In Touch</h2>
-        <p className="text-gray-400 mb-6 max-w-md mx-auto text-sm">
-          Interested in working together or have any questions? Feel free to reach out directly via email.
-        </p>
-        <a
-          href="mailto:pratham.gupta@example.com"
-          className="inline-block px-8 py-3 rounded-lg bg-[#38bdf8] text-black font-semibold text-sm hover:bg-cyan-300 transition-all"
-        >
-          Send an Email
-        </a>
-      </section>
+        <div class="pipeline-step">
+          <div class="pipeline-box"><i class="fa-solid fa-bolt"></i><span>Kafka</span></div>
+        </div>
+        <div class="pipeline-connector conn-2"><div class="data-packet"></div></div>
 
+        <div class="pipeline-step">
+          <div class="pipeline-box"><i class="fa-solid fa-fire"></i><span>Spark</span></div>
+        </div>
+        <div class="pipeline-connector conn-3"><div class="data-packet"></div></div>
+
+        <div class="pipeline-step">
+          <div class="pipeline-box"><i class="fa-solid fa-box-archive"></i><span>Bronze</span></div>
+        </div>
+        <div class="pipeline-connector conn-4"><div class="data-packet"></div></div>
+
+        <div class="pipeline-step">
+          <div class="pipeline-box"><i class="fa-solid fa-filter"></i><span>Silver</span></div>
+        </div>
+        <div class="pipeline-connector conn-5"><div class="data-packet"></div></div>
+
+        <div class="pipeline-step">
+          <div class="pipeline-box"><i class="fa-solid fa-gem"></i><span>Gold</span></div>
+        </div>
+        <div class="pipeline-connector conn-6"><div class="data-packet"></div></div>
+
+        <div class="pipeline-step">
+          <div class="pipeline-box"><i class="fa-solid fa-chart-line"></i><span>Power BI</span></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TECH STACK MARQUEE -->
+    <div class="marquee-container">
+      <div class="marquee-track">
+        <div class="marquee-item"><i class="fa-brands fa-python"></i> Python</div>
+        <div class="marquee-item"><i class="fa-solid fa-fire"></i> Apache Spark</div>
+        <div class="marquee-item"><i class="fa-solid fa-bolt"></i> Apache Kafka</div>
+        <div class="marquee-item"><i class="fa-solid fa-snowflake"></i> Snowflake</div>
+        <div class="marquee-item"><i class="fa-brands fa-microsoft"></i> Azure</div>
+        <div class="marquee-item"><i class="fa-solid fa-database"></i> ClickHouse</div>
+        <div class="marquee-item"><i class="fa-solid fa-wind"></i> Airflow</div>
+        <div class="marquee-item"><i class="fa-brands fa-aws"></i> AWS EMR</div>
+        <div class="marquee-item"><i class="fa-solid fa-server"></i> Postgres</div>
+        <div class="marquee-item"><i class="fa-brands fa-docker"></i> Docker</div>
+        <!-- Duplicate for infinite seamless scroll -->
+        <div class="marquee-item"><i class="fa-brands fa-python"></i> Python</div>
+        <div class="marquee-item"><i class="fa-solid fa-fire"></i> Apache Spark</div>
+        <div class="marquee-item"><i class="fa-solid fa-bolt"></i> Apache Kafka</div>
+        <div class="marquee-item"><i class="fa-solid fa-snowflake"></i> Snowflake</div>
+        <div class="marquee-item"><i class="fa-brands fa-microsoft"></i> Azure</div>
+      </div>
     </div>
-  );
-}
+
+    <!-- METRICS & STATISTICS SECTION -->
+    <section>
+      <div class="section-title"><i class="fa-solid fa-chart-simple"></i> System Telemetry & Metrics</div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">2+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">20+</div>
+          <div class="stat-label">Data Pipelines Deployed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Projects Executed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100M+</div>
+          <div class="stat-label">Records Processed</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECHNICAL SKILLS MATRIX -->
+    <section>
+      <div class="section-title"><i class="fa-solid fa-microchip"></i> Technical Skills Matrix</div>
+      <div class="skills-grid">
+        
+        <div class="skill-category">
+          <div class="skill-category-title"><i class="fa-solid fa-cloud"></i> Cloud Platforms</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Azure</span>
+            <span class="skill-tag">AWS (EMR, S3)</span>
+            <span class="skill-tag">Snowflake</span>
+            <span class="skill-tag">Azure Data Factory</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <div class="skill-category-title"><i class="fa-solid fa-network-wired"></i> Big Data & Compute</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Apache Spark</span>
+            <span class="skill-tag">PySpark</span>
+            <span class="skill-tag">Apache Kafka</span>
+            <span class="skill-tag">Hadoop / Hive</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <div class="skill-category-title"><i class="fa-solid fa-database"></i> Databases & Storage</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Postgres</span>
+            <span class="skill-tag">ClickHouse</span>
+            <span class="skill-tag">HDFS</span>
+            <span class="skill-tag">Azure Blob / ADLS</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <div class="skill-category-title"><i class="fa-solid fa-gears"></i> DevOps & Orchestration</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Apache Airflow</span>
+            <span class="skill-tag">Azure DevOps</span>
+            <span class="skill-tag">Git / CI/CD</span>
+            <span class="skill-tag">Python & SQL</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION & ANIMATED TERMINAL -->
+    <section>
+      <div class="section-title"><i class="fa-solid fa-terminal"></i> About & Live Job Monitor</div>
+      <div class="about-terminal-grid">
+        
+        <div class="about-box">
+          <h3>Who Am I?</h3>
+          <p>
+            I build scalable cloud-native data platforms, distributed systems, and modern data warehouses.
+          </p>
+          <p>
+            My core focus is designing fault-tolerant ETL/ELT pipelines, optimizing analytical workloads across relational and columnar databases, and delivering clean, reliable data pipelines for downstream analytics and AI automation.
+          </p>
+        </div>
+
+        <div class="terminal-window">
+          <div class="terminal-bar">
+            <span class="terminal-title">bash - spark-submit pipeline.py</span>
+            <div class="window-controls">
+              <div class="dot dot-red"></div>
+              <div class="dot dot-yellow"></div>
+              <div class="dot dot-green"></div>
+            </div>
+          </div>
+          <div class="terminal-body" id="terminal-content">
+            <!-- Terminal Output Generated via JS -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- WORK EXPERIENCE TIMELINE -->
+    <section>
+      <div class="section-title"><i class="fa-solid fa-briefcase"></i> Work Experience</div>
+      <div class="timeline-container">
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-date">2025 – PRESENT</div>
+            <div class="timeline-role">Data Engineer</div>
+            <div class="timeline-company">LTIMindtree</div>
+            <ul class="timeline-bullets">
+              <li>Architected multi-tier (Bronze → Silver → Fact) data transformation layers in cloud data warehouses.</li>
+              <li>Modeled and optimized query performance across Postgres and columnar stores like ClickHouse.</li>
+              <li>Implemented automated reconciliation quality checks and CI/CD pipeline deployments.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-date">2024</div>
+            <div class="timeline-role">Data Engineer</div>
+            <div class="timeline-company">Kalvium</div>
+            <ul class="timeline-bullets">
+              <li>Engineered real-time streaming pipelines using Apache Kafka and Apache Spark.</li>
+              <li>Configured Airflow DAGs for job orchestration and continuous data validation.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FEATURED PROJECTS WITH ARCHITECTURE DIAGRAMS -->
+    <section>
+      <div class="section-title"><i class="fa-solid fa-folder-open"></i> Production Data Engineering Projects</div>
+      <div class="projects-grid">
+
+        <!-- Project 1 -->
+        <div class="project-card">
+          <div>
+            <div class="project-status-bar">
+              <span class="status-online"><i class="fa-solid fa-circle"></i> Pipeline Status: Online</span>
+              <span style="color:var(--text-muted)">AWS EMR</span>
+            </div>
+            <div class="project-title">Distributed Streaming Pipeline</div>
+            <p class="project-desc">Real-time ingestion engine processing live event streams into S3 and Snowflake with automated Airflow monitoring.</p>
+            
+            <!-- SVG Architecture -->
+            <div class="arch-diagram">
+              <svg viewBox="0 0 400 40">
+                <text x="10" y="25" fill="#38bdf8" font-size="12" font-family="monospace">Kafka</text>
+                <path d="M 50 20 L 90 20" stroke="#00e5ff" stroke-width="2"/>
+                <text x="100" y="25" fill="#38bdf8" font-size="12" font-family="monospace">Spark</text>
+                <path d="M 145 20 L 185 20" stroke="#00e5ff" stroke-width="2"/>
+                <text x="195" y="25" fill="#38bdf8" font-size="12" font-family="monospace">S3</text>
+                <path d="M 220 20 L 260 20" stroke="#00e5ff" stroke-width="2"/>
+                <text x="270" y="25" fill="#38bdf8" font-size="12" font-family="monospace">Snowflake</text>
+              </svg>
+            </div>
+
+            <div class="skill-tags" style="margin-bottom:1rem;">
+              <span class="skill-tag">Spark</span>
+              <span class="skill-tag">Kafka</span>
+              <span class="skill-tag">Airflow</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card">
+          <div>
+            <div class="project-status-bar">
+              <span class="status-online"><i class="fa-solid fa-circle"></i> Status: Active</span>
+              <span style="color:var(--text-muted)">ClickHouse</span>
+            </div>
+            <div class="project-title">Analytical Store & Ingestion Pipeline</div>
+            <p class="project-desc">Hybrid relational/columnar pipeline ingesting high-volume event logs into Postgres and syncing to ClickHouse.</p>
+
+            <!-- SVG Architecture -->
+            <div class="arch-diagram">
+              <svg viewBox="0 0 400 40">
+                <text x="10" y="25" fill="#38bdf8" font-size="12" font-family="monospace">API</text>
+                <path d="M 40 20 L 80 20" stroke="#00e5ff" stroke-width="2"/>
+                <text x="90" y="25" fill="#38bdf8" font-size="12" font-family="monospace">Postgres</text>
+                <path d="M 150 20 L 190 20" stroke="#00e5ff" stroke-width="2"/>
+                <text x="200" y="25" fill="#38bdf8" font-size="12" font-family="monospace">ClickHouse</text>
+              </svg>
+            </div>
+
+            <div class="skill-tags" style="margin-bottom:1rem;">
+              <span class="skill-tag">ClickHouse</span>
+              <span class="skill-tag">Postgres</span>
+              <span class="skill-tag">Python</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- CONTACT SECTION -->
+    <section>
+      <div class="contact-box">
+        <h2 style="font-size:2rem; color:var(--cyan-glow); font-family:var(--font-mono); margin-bottom:0.5rem;">Get In Touch</h2>
+        <p style="color:var(--text-muted); max-width:500px; margin:0 auto;">
+          Ready to scale your cloud data infrastructure or discuss data engineering opportunities?
+        </p>
+
+        <div class="contact-grid">
+          <a href="#contact" className="btn">Contact Me</a>
+          <a href="https://www.linkedin.com/in/pratham-gupta-b2158b21b" target="_blank" class="btn-cyber"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>Designed & Built by <span>Pratham Gupta</span> | Data Engineer</p>
+      <p style="margin-top:0.3rem;">Cloud • Distributed Systems • Data Warehousing</p>
+    </footer>
+
+  </div>
+
+  <!-- JAVASCRIPT: PARTICLES CANVAS & TERMINAL SIMULATION -->
+  <script>
+    /* Background Canvas Particles Animation */
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const particles = [];
+    const particleCount = 45;
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        radius: Math.random() * 2 + 1
+      });
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#00e5ff';
+      ctx.strokeStyle = 'rgba(30, 41, 59, 0.5)';
+
+      for (let i = 0; i < particles.length; i++) {
+        let p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          let p2 = particles[j];
+          let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    /* Terminal Simulation */
+    const termContent = document.getElementById('terminal-content');
+    const termLines = [
+      { text: "$ spark-submit pipeline.py --cluster-mode", type: "cmd" },
+      { text: "✔ Connected to Kafka Brokers (broker-1:9092)", type: "success" },
+      { text: "✔ Ingesting 4,250,000 streaming events/sec...", type: "cmd" },
+      { text: "✔ Bronze Layer Staging Written to S3", type: "success" },
+      { text: "✔ Silver Schema Normalization Complete", type: "success" },
+      { text: "✔ Gold Data Mart Aggregated into Snowflake", type: "success" },
+      { text: "STATUS: Pipeline Executed Successfully (0.84s latency)", type: "success" }
+    ];
+
+    let lineIndex = 0;
+    function printTerminalLine() {
+      if (lineIndex < termLines.length) {
+        const line = termLines[lineIndex];
+        const div = document.createElement('div');
+        div.className = 'term-line';
+        div.innerHTML = `<span class="term-prompt">&gt;</span> <span class="${line.type === 'success' ? 'term-success' : 'term-cmd'}">${line.text}</span>`;
+        termContent.appendChild(div);
+        termContent.scrollTop = termContent.scrollHeight;
+        lineIndex++;
+        setTimeout(printTerminalLine, 1200);
+      } else {
+        setTimeout(() => {
+          termContent.innerHTML = '';
+          lineIndex = 0;
+          printTerminalLine();
+        }, 4000);
+      }
+    }
+    printTerminalLine();
+  </script>
+</body>
+</html>
