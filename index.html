@@ -256,8 +256,8 @@
       100% { left: 100%; }
     }
 
-   /* ============================================================
-   BYTEBYTEGO HIGH-TECH ANIMATED PIPELINE ARCHITECTURE
+ /* ============================================================
+   BYTEBYTEGO ENCLOSED STAGE BOXES & ACCURATE SVG CONNECTORS
    ============================================================ */
 .pipeline-cyber-wrapper {
   background: var(--card-bg);
@@ -283,56 +283,103 @@
   position: relative;
 }
 
-/* Stage Row Nodes Container */
-.pipeline-stage-row {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+/* Outer Stage Container Boxes */
+.stage-box {
   width: 100%;
+  border-radius: 12px;
+  padding: 0.8rem;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.stage-box-collect {
+  background: rgba(56, 189, 248, 0.05);
+  border-color: rgba(56, 189, 248, 0.25);
+}
+
+.stage-box-ingest {
+  background: rgba(244, 63, 94, 0.05);
+  border-color: rgba(244, 63, 94, 0.3);
+  display: flex;
+  justify-content: center;
+}
+
+.stage-box-store {
+  background: rgba(168, 85, 247, 0.05);
+  border-color: rgba(168, 85, 247, 0.25);
+}
+
+.stage-box-compute {
+  background: rgba(34, 197, 94, 0.05);
+  border-color: rgba(34, 197, 94, 0.25);
+}
+
+.stage-box-consume {
+  background: rgba(245, 158, 11, 0.05);
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+/* Grids for Exact SVG Alignment */
+.grid-3-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  z-index: 2;
-  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.grid-2-col-centered {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  width: 66.66%;
+  margin: 0 auto;
+}
+
+.grid-4-col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.8rem;
+  width: 100%;
 }
 
 /* Individual Node Cards */
 .cyber-node {
   background: rgba(5, 8, 22, 0.9);
   border: 1px solid var(--border-color);
-  border-radius: 10px;
-  padding: 0.75rem 1.2rem;
+  border-radius: 8px;
+  padding: 0.75rem 0.5rem;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  min-width: 140px;
+  gap: 0.6rem;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   transition: all 0.3s ease;
 }
 
 .cyber-node:hover {
   border-color: var(--cyan-glow);
-  box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
-  transform: translateY(-3px);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.25);
+  transform: translateY(-2px);
 }
 
 .cyber-node span {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--text-main);
   white-space: nowrap;
 }
 
-/* Middle Wide Card: Data Load & Event Queue */
+/* Ingestion Inner Pill */
 .cyber-node-wide {
   background: rgba(5, 8, 22, 0.95);
-  border: 1px solid rgba(0, 229, 255, 0.4);
-  border-radius: 12px;
-  padding: 0.85rem 1.8rem;
+  border: 1px solid rgba(244, 63, 94, 0.4);
+  border-radius: 10px;
+  padding: 0.75rem 1.8rem;
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+  box-shadow: 0 0 18px rgba(244, 63, 94, 0.15);
 }
 
 .queue-pill-box {
@@ -357,10 +404,7 @@
   100% { opacity: 1; transform: scaleY(1.1); }
 }
 
-/* ============================================================
-   ICON SPECIFIC ANIMATIONS
-   ============================================================ */
-/* Stage 1: Data Streams Wifi Pulse */
+/* Custom Icon Animations */
 .icon-wifi {
   color: #38bdf8;
   animation: wifiWave 1.8s infinite ease-in-out;
@@ -370,7 +414,6 @@
   50% { opacity: 1; transform: scale(1.15); color: var(--cyan-glow); }
 }
 
-/* Stage 1: Apps Window Pulse */
 .icon-app {
   color: #38bdf8;
   animation: appBlink 2s infinite alternate;
@@ -380,7 +423,6 @@
   100% { color: #a855f7; transform: translateY(-1px); }
 }
 
-/* Stage 2: Rotating Gear */
 .icon-gear-spin {
   color: #f43f5e;
   animation: spinGear 3.5s linear infinite;
@@ -389,7 +431,6 @@
   100% { transform: rotate(360deg); }
 }
 
-/* Stage 3: Water Wave for Data Lake */
 .icon-wave {
   color: #00e5ff;
   animation: waveMotion 2s infinite ease-in-out;
@@ -399,7 +440,6 @@
   50% { transform: translateY(-3px); }
 }
 
-/* Stage 4: Electric Bolt for Stream Processing */
 .icon-bolt {
   color: #f59e0b;
   animation: boltGlow 1.2s infinite alternate;
@@ -409,7 +449,6 @@
   100% { opacity: 1; filter: drop-shadow(0 0 10px #f59e0b); transform: scale(1.1); }
 }
 
-/* Stage 5: Spinning Electron Atom */
 .icon-atom {
   color: #22c55e;
   animation: spinAtom 4s linear infinite;
@@ -418,7 +457,6 @@
   100% { transform: rotate(360deg); }
 }
 
-/* Stage 5: Brain Pulse */
 .icon-brain {
   color: #a855f7;
   animation: brainGlow 1.6s infinite alternate;
@@ -428,12 +466,10 @@
   100% { filter: drop-shadow(0 0 8px #a855f7); }
 }
 
-/* ============================================================
-   SVG FLOW CONNECTOR CANVAS
-   ============================================================ */
+/* SVG Connector Lines & Flow Particles */
 .svg-flow-connector {
   width: 100%;
-  height: 60px;
+  height: 50px;
   display: block;
   overflow: visible;
 }
@@ -450,9 +486,7 @@
   filter: drop-shadow(0 0 6px var(--cyan-glow));
 }
 
-/* ============================================================
-   RIGHT-SIDE STAGE BADGES (Collect, Ingest, Store, Compute, Consume)
-   ============================================================ */
+/* Sidebar Badges */
 .pipeline-stage-sidebar {
   display: flex;
   flex-direction: column;
@@ -475,7 +509,6 @@
   justify-content: center;
   gap: 0.4rem;
   border: 1px solid transparent;
-  position: relative;
 }
 
 .sb-collect { background: rgba(56, 189, 248, 0.12); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); }
@@ -487,9 +520,9 @@
 @media (max-width: 900px) {
   .pipeline-flex-layout { flex-direction: column; }
   .pipeline-stage-sidebar { flex-direction: row; width: 100%; flex-wrap: wrap; }
-  .pipeline-stage-row { flex-wrap: wrap; }
+  .grid-3-col, .grid-4-col { grid-template-columns: 1fr; }
+  .grid-2-col-centered { grid-template-columns: 1fr; width: 100%; }
 }
-
     /* ============================================================
        04. TECH STACK MARQUEE
        ============================================================ */
@@ -945,7 +978,7 @@
     </header>
 
     <!-- LIVE ANIMATED DATA PIPELINE -->
-   <!-- LIVE ANIMATED DATA PIPELINE (BYTEBYTEGO ACCURATE REPLICATE) -->
+   <!-- LIVE ANIMATED DATA PIPELINE (ACCURATE STAGE BOXES & PERFECT CONSUME CONNECTORS) -->
 <section class="pipeline-section">
   <div class="section-title">
     <i class="fa-solid fa-diagram-project"></i> End-to-End Enterprise Data Architecture
@@ -954,51 +987,48 @@
   <div class="pipeline-cyber-wrapper">
     <div class="pipeline-flex-layout">
       
-      <!-- MAIN CANVAS WITH 5 STAGES & CONVERGING/DIVERGING CONNECTOR ANIMATIONS -->
+      <!-- MAIN CANVAS -->
       <div class="pipeline-main-canvas">
 
-        <!-- STAGE 1: COLLECT NODES -->
-        <div class="pipeline-stage-row">
-          <div class="cyber-node">
-            <i class="fa-solid fa-database" style="color:#38bdf8"></i>
-            <span>Data Stores</span>
-          </div>
-          <div class="cyber-node">
-            <i class="fa-solid fa-wifi icon-wifi"></i>
-            <span>Data Streams</span>
-          </div>
-          <div class="cyber-node">
-            <i class="fa-solid fa-window-restore icon-app"></i>
-            <span>Applications</span>
+        <!-- STAGE 1: COLLECT BOX -->
+        <div class="stage-box stage-box-collect">
+          <div class="grid-3-col">
+            <div class="cyber-node">
+              <i class="fa-solid fa-database" style="color:#38bdf8"></i>
+              <span>Data Stores</span>
+            </div>
+            <div class="cyber-node">
+              <i class="fa-solid fa-wifi icon-wifi"></i>
+              <span>Data Streams</span>
+            </div>
+            <div class="cyber-node">
+              <i class="fa-solid fa-window-restore icon-app"></i>
+              <span>Applications</span>
+            </div>
           </div>
         </div>
 
-        <!-- SVG FLOW 1 -> 2: 3 LINES CONVERGING TO CENTRAL HUB -->
-        <svg class="svg-flow-connector" viewBox="0 0 600 60">
-          <!-- Left curve -->
-          <path id="path1-1" class="flow-path" d="M 100 0 Q 100 30 300 50" />
-          <!-- Middle straight -->
-          <path id="path1-2" class="flow-path" d="M 300 0 L 300 50" />
-          <!-- Right curve -->
-          <path id="path1-3" class="flow-path" d="M 500 0 Q 500 30 300 50" />
+        <!-- SVG FLOW 1 -> 2 -->
+        <svg class="svg-flow-connector" viewBox="0 0 600 50">
+          <path class="flow-path" d="M 100 0 Q 100 25 300 40" />
+          <path class="flow-path" d="M 300 0 L 300 40" />
+          <path class="flow-path" d="M 500 0 Q 500 25 300 40" />
 
-          <!-- Junction Hub Circle -->
-          <circle cx="300" cy="50" r="5" fill="#00e5ff" />
+          <circle cx="300" cy="40" r="4" fill="#00e5ff" />
 
-          <!-- Flowing Data Particles -->
-          <circle class="data-particle" r="4">
-            <animateMotion dur="1.8s" repeatCount="indefinite" path="M 100 0 Q 100 30 300 50" />
+          <circle class="data-particle" r="3.5">
+            <animateMotion dur="1.8s" repeatCount="indefinite" path="M 100 0 Q 100 25 300 40" />
           </circle>
-          <circle class="data-particle" r="4">
-            <animateMotion dur="1.8s" repeatCount="indefinite" path="M 300 0 L 300 50" begin="0.3s" />
+          <circle class="data-particle" r="3.5">
+            <animateMotion dur="1.8s" repeatCount="indefinite" path="M 300 0 L 300 40" begin="0.3s" />
           </circle>
-          <circle class="data-particle" r="4">
-            <animateMotion dur="1.8s" repeatCount="indefinite" path="M 500 0 Q 500 30 300 50" begin="0.6s" />
+          <circle class="data-particle" r="3.5">
+            <animateMotion dur="1.8s" repeatCount="indefinite" path="M 500 0 Q 500 25 300 40" begin="0.6s" />
           </circle>
         </svg>
 
-        <!-- STAGE 2: INGEST NODE -->
-        <div class="pipeline-stage-row" style="justify-content: center;">
+        <!-- STAGE 2: INGEST BOX -->
+        <div class="stage-box stage-box-ingest">
           <div class="cyber-node-wide">
             <div style="display:flex; align-items:center; gap:0.6rem;">
               <i class="fa-solid fa-gear icon-gear-spin"></i>
@@ -1018,133 +1048,128 @@
           </div>
         </div>
 
-        <!-- SVG FLOW 2 -> 3: 1 LINE SPLITTING INTO 3 STORE BRANCHES -->
-        <svg class="svg-flow-connector" viewBox="0 0 600 60">
-          <!-- Top straight connector from stage 2 -->
-          <path class="flow-path" d="M 300 0 L 300 10" />
-          <!-- 3 Branching paths -->
-          <path class="flow-path" d="M 300 10 Q 300 35 100 60" />
-          <path class="flow-path" d="M 300 10 L 300 60" />
-          <path class="flow-path" d="M 300 10 Q 300 35 500 60" />
+        <!-- SVG FLOW 2 -> 3 -->
+        <svg class="svg-flow-connector" viewBox="0 0 600 50">
+          <path class="flow-path" d="M 300 0 L 300 10 Q 300 30 100 50" />
+          <path class="flow-path" d="M 300 0 L 300 50" />
+          <path class="flow-path" d="M 300 0 L 300 10 Q 300 30 500 50" />
 
-          <!-- Junction Hub Circles -->
           <circle cx="300" cy="10" r="4" fill="#f43f5e" />
 
-          <!-- Flowing Data Particles -->
-          <circle class="data-particle" r="4">
-            <animateMotion dur="2s" repeatCount="indefinite" path="M 300 10 Q 300 35 100 60" />
+          <circle class="data-particle" r="3.5">
+            <animateMotion dur="2s" repeatCount="indefinite" path="M 300 0 L 300 10 Q 300 30 100 50" />
           </circle>
-          <circle class="data-particle" r="4">
-            <animateMotion dur="2s" repeatCount="indefinite" path="M 300 10 L 300 60" begin="0.4s" />
+          <circle class="data-particle" r="3.5">
+            <animateMotion dur="2s" repeatCount="indefinite" path="M 300 0 L 300 50" begin="0.4s" />
           </circle>
-          <circle class="data-particle" r="4">
-            <animateMotion dur="2s" repeatCount="indefinite" path="M 300 10 Q 300 35 500 60" begin="0.8s" />
+          <circle class="data-particle" r="3.5">
+            <animateMotion dur="2s" repeatCount="indefinite" path="M 300 0 L 300 10 Q 300 30 500 50" begin="0.8s" />
           </circle>
         </svg>
 
-        <!-- STAGE 3: STORE NODES -->
-        <div class="pipeline-stage-row">
-          <div class="cyber-node">
-            <i class="fa-solid fa-water icon-wave"></i>
-            <span>Data Lake</span>
-          </div>
-          <div class="cyber-node">
-            <i class="fa-solid fa-warehouse" style="color:#a855f7"></i>
-            <span>Data Warehouse</span>
-          </div>
-          <div class="cyber-node">
-            <i class="fa-solid fa-server" style="color:#00e5ff"></i>
-            <span>Data Lakehouse</span>
+        <!-- STAGE 3: STORE BOX -->
+        <div class="stage-box stage-box-store">
+          <div class="grid-3-col">
+            <div class="cyber-node">
+              <i class="fa-solid fa-water icon-wave"></i>
+              <span>Data Lake</span>
+            </div>
+            <div class="cyber-node">
+              <i class="fa-solid fa-warehouse" style="color:#a855f7"></i>
+              <span>Data Warehouse</span>
+            </div>
+            <div class="cyber-node">
+              <i class="fa-solid fa-server" style="color:#00e5ff"></i>
+              <span>Data Lakehouse</span>
+            </div>
           </div>
         </div>
 
-        <!-- SVG FLOW 3 -> 4: 3 PATHS CONVERGING THEN DIVERGING INTO DUAL PROCESSING LOOPS -->
-        <svg class="svg-flow-connector" viewBox="0 0 600 60">
-          <!-- Converging 3 paths -->
-          <path class="flow-path" d="M 100 0 Q 100 20 300 25" />
-          <path class="flow-path" d="M 300 0 L 300 25" />
-          <path class="flow-path" d="M 500 0 Q 500 20 300 25" />
+        <!-- SVG FLOW 3 -> 4 -->
+        <svg class="svg-flow-connector" viewBox="0 0 600 50">
+          <path class="flow-path" d="M 100 0 Q 100 20 300 25 Q 180 35 200 50" />
+          <path class="flow-path" d="M 300 0 L 300 25 Q 420 35 400 50" />
+          <path class="flow-path" d="M 500 0 Q 500 20 300 25 Q 180 35 200 50" />
 
-          <!-- Central Hub -->
-          <circle cx="300" cy="25" r="5" fill="#a855f7" />
+          <circle cx="300" cy="25" r="4" fill="#a855f7" />
 
-          <!-- Dual diverging loops down to Batch & Stream -->
-          <path class="flow-path" d="M 300 25 Q 180 35 200 60" />
-          <path class="flow-path" d="M 300 25 Q 420 35 400 60" />
-
-          <!-- Flowing Data Particles -->
-          <circle class="data-particle" r="4">
-            <animateMotion dur="2.2s" repeatCount="indefinite" path="M 100 0 Q 100 20 300 25 M 300 25 Q 180 35 200 60" />
+          <circle class="data-particle" r="3.5">
+            <animateMotion dur="2.2s" repeatCount="indefinite" path="M 100 0 Q 100 20 300 25 Q 180 35 200 50" />
           </circle>
-          <circle class="data-particle" r="4">
-            <animateMotion dur="2.2s" repeatCount="indefinite" path="M 500 0 Q 500 20 300 25 M 300 25 Q 420 35 400 60" begin="0.5s" />
+          <circle class="data-particle" r="3.5">
+            <animateMotion dur="2.2s" repeatCount="indefinite" path="M 500 0 Q 500 20 300 25 Q 420 35 400 50" begin="0.5s" />
           </circle>
         </svg>
 
-        <!-- STAGE 4: COMPUTE NODES -->
-        <div class="pipeline-stage-row" style="justify-content: space-around; width: 80%;">
-          <div class="cyber-node">
-            <i class="fa-solid fa-boxes-stacked" style="color:#22c55e"></i>
-            <span>Batch Processing</span>
-          </div>
-          <div class="cyber-node">
-            <i class="fa-solid fa-bolt icon-bolt"></i>
-            <span>Stream Processing</span>
+        <!-- STAGE 4: COMPUTE BOX -->
+        <div class="stage-box stage-box-compute">
+          <div class="grid-2-col-centered">
+            <div class="cyber-node">
+              <i class="fa-solid fa-boxes-stacked" style="color:#22c55e"></i>
+              <span>Batch Processing</span>
+            </div>
+            <div class="cyber-node">
+              <i class="fa-solid fa-bolt icon-bolt"></i>
+              <span>Stream Processing</span>
+            </div>
           </div>
         </div>
 
-        <!-- SVG FLOW 4 -> 5: 2 PATHS CONVERGING & FANNING OUT TO 4 CONSUMER NODES -->
-        <svg class="svg-flow-connector" viewBox="0 0 600 60">
-          <!-- Converging 2 compute paths -->
-          <path class="flow-path" d="M 200 0 Q 200 20 300 25" />
-          <path class="flow-path" d="M 400 0 Q 400 20 300 25" />
+        <!-- SVG FLOW 4 -> 5 (FIXED FOR ALL 4 CONSUME CARDS AT X=75, 225, 375, 525) -->
+        <svg class="svg-flow-connector" viewBox="0 0 600 50">
+          <!-- Left compute node (X=200) splits to 1st & 2nd consume cards -->
+          <path class="flow-path" d="M 200 0 Q 200 20 300 25 Q 300 35 75 50" />
+          <path class="flow-path" d="M 200 0 Q 200 20 300 25 Q 300 35 225 50" />
 
-          <circle cx="300" cy="25" r="5" fill="#22c55e" />
+          <!-- Right compute node (X=400) splits to 3rd & 4th consume cards -->
+          <path class="flow-path" d="M 400 0 Q 400 20 300 25 Q 300 35 375 50" />
+          <path class="flow-path" d="M 400 0 Q 400 20 300 25 Q 300 35 525 50" />
 
-          <!-- Fanning out to 4 consume nodes -->
-          <path class="flow-path" d="M 300 25 Q 300 35 75 60" />
-          <path class="flow-path" d="M 300 25 Q 300 35 225 60" />
-          <path class="flow-path" d="M 300 25 Q 300 35 375 60" />
-          <path class="flow-path" d="M 300 25 Q 300 35 525 60" />
+          <circle cx="300" cy="25" r="4" fill="#22c55e" />
 
-          <!-- Flowing Data Particles -->
-          <circle class="data-particle" r="4">
-            <animateMotion dur="2.4s" repeatCount="indefinite" path="M 200 0 Q 200 20 300 25 M 300 25 Q 300 35 75 60" />
+          <!-- Particle 1 -> Data Science (X=75) -->
+          <circle class="data-particle" r="3.5">
+            <animateMotion dur="2.4s" repeatCount="indefinite" path="M 200 0 Q 200 20 300 25 Q 300 35 75 50" />
           </circle>
-          <circle class="data-particle" r="4">
-            <animateMotion dur="2.4s" repeatCount="indefinite" path="M 200 0 Q 200 20 300 25 M 300 25 Q 300 35 225 60" begin="0.4s" />
+          <!-- Particle 2 -> Business Intelligence (X=225) -->
+          <circle class="data-particle" r="3.5">
+            <animateMotion dur="2.4s" repeatCount="indefinite" path="M 200 0 Q 200 20 300 25 Q 300 35 225 50" begin="0.4s" />
           </circle>
-          <circle class="data-particle" r="4">
-            <animateMotion dur="2.4s" repeatCount="indefinite" path="M 400 0 Q 400 20 300 25 M 300 25 Q 300 35 375 60" begin="0.8s" />
+          <!-- Particle 3 -> Self-Service Analytics (X=375) -->
+          <circle class="data-particle" r="3.5">
+            <animateMotion dur="2.4s" repeatCount="indefinite" path="M 400 0 Q 400 20 300 25 Q 300 35 375 50" begin="0.8s" />
           </circle>
-          <circle class="data-particle" r="4">
-            <animateMotion dur="2.4s" repeatCount="indefinite" path="M 400 0 Q 400 20 300 25 M 300 25 Q 300 35 525 60" begin="1.2s" />
+          <!-- Particle 4 -> ML Services (X=525) -->
+          <circle class="data-particle" r="3.5">
+            <animateMotion dur="2.4s" repeatCount="indefinite" path="M 400 0 Q 400 20 300 25 Q 300 35 525 50" begin="1.2s" />
           </circle>
         </svg>
 
-        <!-- STAGE 5: CONSUME NODES -->
-        <div class="pipeline-stage-row">
-          <div class="cyber-node">
-            <i class="fa-solid fa-atom icon-atom"></i>
-            <span>Data Science</span>
-          </div>
-          <div class="cyber-node">
-            <i class="fa-solid fa-brain icon-brain"></i>
-            <span>Business Intelligence</span>
-          </div>
-          <div class="cyber-node">
-            <i class="fa-solid fa-chart-pie" style="color:#f59e0b"></i>
-            <span>Self-Service Analytics</span>
-          </div>
-          <div class="cyber-node">
-            <i class="fa-solid fa-network-wired" style="color:#38bdf8"></i>
-            <span>ML Services</span>
+        <!-- STAGE 5: CONSUME BOX -->
+        <div class="stage-box stage-box-consume">
+          <div class="grid-4-col">
+            <div class="cyber-node">
+              <i class="fa-solid fa-atom icon-atom"></i>
+              <span>Data Science</span>
+            </div>
+            <div class="cyber-node">
+              <i class="fa-solid fa-brain icon-brain"></i>
+              <span>Business Intelligence</span>
+            </div>
+            <div class="cyber-node">
+              <i class="fa-solid fa-chart-pie" style="color:#f59e0b"></i>
+              <span>Self-Service Analytics</span>
+            </div>
+            <div class="cyber-node">
+              <i class="fa-solid fa-network-wired" style="color:#38bdf8"></i>
+              <span>ML Services</span>
+            </div>
           </div>
         </div>
 
       </div>
 
-      <!-- RIGHT-SIDE VERTICAL STAGE BADGES -->
+      <!-- RIGHT SIDEBAR STAGE BADGES -->
       <div class="pipeline-stage-sidebar">
         <div class="stage-badge-item sb-collect"><i class="fa-solid fa-download"></i> Collect</div>
         <div class="stage-badge-item sb-ingest"><i class="fa-solid fa-filter"></i> Ingest</div>
