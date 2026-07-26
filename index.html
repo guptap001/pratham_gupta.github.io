@@ -259,7 +259,15 @@
  /* ============================================================
    BYTEBYTEGO ENCLOSED STAGE BOXES & ACCURATE SVG CONNECTORS
    ============================================================ */
+.pipeline-section {
+  width: 100%;
+  margin-bottom: 4rem;
+  clear: both;
+}
+
 .pipeline-cyber-wrapper {
+  width: 100%;
+  box-sizing: border-box;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 16px;
@@ -1047,7 +1055,7 @@
     </header>
 
     <!-- LIVE ANIMATED DATA PIPELINE -->
-   <!-- LIVE ANIMATED DATA PIPELINE (ACCURATE STAGE BOXES & PERFECT CONSUME CONNECTORS) -->
+   <!-- LIVE ANIMATED DATA PIPELINE -->
 <section class="pipeline-section">
   <div class="section-title">
     <i class="fa-solid fa-diagram-project"></i> End-to-End Enterprise Data Architecture
@@ -1184,31 +1192,24 @@
           </div>
         </div>
 
-        <!-- SVG FLOW 4 -> 5 (FIXED FOR ALL 4 CONSUME CARDS AT X=75, 225, 375, 525) -->
+        <!-- SVG FLOW 4 -> 5 -->
         <svg class="svg-flow-connector" viewBox="0 0 600 50">
-          <!-- Left compute node (X=200) splits to 1st & 2nd consume cards -->
           <path class="flow-path" d="M 200 0 Q 200 20 300 25 Q 300 35 75 50" />
           <path class="flow-path" d="M 200 0 Q 200 20 300 25 Q 300 35 225 50" />
-
-          <!-- Right compute node (X=400) splits to 3rd & 4th consume cards -->
           <path class="flow-path" d="M 400 0 Q 400 20 300 25 Q 300 35 375 50" />
           <path class="flow-path" d="M 400 0 Q 400 20 300 25 Q 300 35 525 50" />
 
           <circle cx="300" cy="25" r="4" fill="#22c55e" />
 
-          <!-- Particle 1 -> Data Science (X=75) -->
           <circle class="data-particle" r="3.5">
             <animateMotion dur="2.4s" repeatCount="indefinite" path="M 200 0 Q 200 20 300 25 Q 300 35 75 50" />
           </circle>
-          <!-- Particle 2 -> Business Intelligence (X=225) -->
           <circle class="data-particle" r="3.5">
             <animateMotion dur="2.4s" repeatCount="indefinite" path="M 200 0 Q 200 20 300 25 Q 300 35 225 50" begin="0.4s" />
           </circle>
-          <!-- Particle 3 -> Self-Service Analytics (X=375) -->
           <circle class="data-particle" r="3.5">
             <animateMotion dur="2.4s" repeatCount="indefinite" path="M 400 0 Q 400 20 300 25 Q 300 35 375 50" begin="0.8s" />
           </circle>
-          <!-- Particle 4 -> ML Services (X=525) -->
           <circle class="data-particle" r="3.5">
             <animateMotion dur="2.4s" repeatCount="indefinite" path="M 400 0 Q 400 20 300 25 Q 300 35 525 50" begin="1.2s" />
           </circle>
@@ -1236,57 +1237,47 @@
           </div>
         </div>
 
-      </div>
+      </div> <!-- /pipeline-main-canvas -->
 
-     <!-- RIGHT SIDEBAR STAGE BADGES WITH STEPPING DROPDOWN ARROWS & UNIQUE ICON ANIMATIONS -->
-<div class="pipeline-stage-sidebar">
-  
-  <!-- STAGE 1: COLLECT -->
-  <div class="stage-badge-item sb-collect">
-    <i class="fa-solid fa-download sb-icon-collect"></i> Collect
-  </div>
+      <!-- RIGHT SIDEBAR STAGE BADGES -->
+      <div class="pipeline-stage-sidebar">
+        <div class="stage-badge-item sb-collect">
+          <i class="fa-solid fa-download sb-icon-collect"></i> Collect
+        </div>
+        <div class="sidebar-arrow-connector">
+          <i class="fa-solid fa-chevron-down sidebar-arrow-icon" style="animation-delay: 0s;"></i>
+        </div>
 
-  <!-- DROP ARROW 1 -> 2 -->
-  <div class="sidebar-arrow-connector">
-    <i class="fa-solid fa-chevron-down sidebar-arrow-icon" style="animation-delay: 0s;"></i>
-  </div>
+        <div class="stage-badge-item sb-ingest">
+          <i class="fa-solid fa-filter sb-icon-ingest"></i> Ingest
+        </div>
+        <div class="sidebar-arrow-connector">
+          <i class="fa-solid fa-chevron-down sidebar-arrow-icon" style="animation-delay: 0.3s;"></i>
+        </div>
 
-  <!-- STAGE 2: INGEST -->
-  <div class="stage-badge-item sb-ingest">
-    <i class="fa-solid fa-filter sb-icon-ingest"></i> Ingest
-  </div>
+        <div class="stage-badge-item sb-store">
+          <i class="fa-solid fa-box-archive sb-icon-store"></i> Store
+        </div>
+        <div class="sidebar-arrow-connector">
+          <i class="fa-solid fa-chevron-down sidebar-arrow-icon" style="animation-delay: 0.6s;"></i>
+        </div>
 
-  <!-- DROP ARROW 2 -> 3 -->
-  <div class="sidebar-arrow-connector">
-    <i class="fa-solid fa-chevron-down sidebar-arrow-icon" style="animation-delay: 0.3s;"></i>
-  </div>
+        <div class="stage-badge-item sb-compute">
+          <i class="fa-solid fa-microchip sb-icon-compute"></i> Compute
+        </div>
+        <div class="sidebar-arrow-connector">
+          <i class="fa-solid fa-chevron-down sidebar-arrow-icon" style="animation-delay: 0.9s;"></i>
+        </div>
 
-  <!-- STAGE 3: STORE -->
-  <div class="stage-badge-item sb-store">
-    <i class="fa-solid fa-box-archive sb-icon-store"></i> Store
-  </div>
+        <div class="stage-badge-item sb-consume">
+          <i class="fa-solid fa-chart-line sb-icon-consume"></i> Consume
+        </div>
+      </div> <!-- /pipeline-stage-sidebar -->
 
-  <!-- DROP ARROW 3 -> 4 -->
-  <div class="sidebar-arrow-connector">
-    <i class="fa-solid fa-chevron-down sidebar-arrow-icon" style="animation-delay: 0.6s;"></i>
-  </div>
-
-  <!-- STAGE 4: COMPUTE -->
-  <div class="stage-badge-item sb-compute">
-    <i class="fa-solid fa-microchip sb-icon-compute"></i> Compute
-  </div>
-
-  <!-- DROP ARROW 4 -> 5 -->
-  <div class="sidebar-arrow-connector">
-    <i class="fa-solid fa-chevron-down sidebar-arrow-icon" style="animation-delay: 0.9s;"></i>
-  </div>
-
-  <!-- STAGE 5: CONSUME -->
-  <div class="stage-badge-item sb-consume">
-    <i class="fa-solid fa-chart-line sb-icon-consume"></i> Consume
-  </div>
-
-</div>
+    </div> <!-- /pipeline-flex-layout -->
+  </div> <!-- /pipeline-cyber-wrapper -->
+</section> <!-- /pipeline-section -->
+    
     <!-- TECH STACK MARQUEE -->
     <div class="marquee-container">
       <div class="marquee-track">
