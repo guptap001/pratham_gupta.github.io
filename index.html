@@ -257,96 +257,174 @@
     }
 
     /* ============================================================
-       03. LIVE ANIMATED DATA PIPELINE (END-TO-END DATA FLOW)
-       ============================================================ */
-    .pipeline-section {
-      margin-bottom: 4rem;
-    }
+   5-STAGE ANIMATED DATA PIPELINE OVERVIEW (ByteByteGo-Style Cyber Theme)
+   ============================================================ */
+.pipeline-overview-wrapper {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+}
 
-    .pipeline-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 2rem 1rem;
-      overflow-x: auto;
-      position: relative;
-    }
+.pipeline-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
 
-    .pipeline-step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-width: 110px;
-      z-index: 2;
-    }
+.stage-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
 
-    .pipeline-box {
-      width: 80px;
-      height: 80px;
-      background: rgba(5, 8, 22, 0.9);
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 0.4rem;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
+@media (max-width: 768px) {
+  .stage-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
 
-    .pipeline-box i {
-      font-size: 1.5rem;
-      color: var(--primary);
-    }
+/* Stage Badge Labels (Collect, Ingest, Store, Compute, Consume) */
+.stage-badge {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  text-align: center;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border: 1px solid transparent;
+}
 
-    .pipeline-box span {
-      font-size: 0.75rem;
-      font-weight: 600;
-      font-family: var(--font-mono);
-    }
+.badge-collect { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); }
+.badge-ingest  { background: rgba(244, 63, 94, 0.15); color: #f43f5e; border-color: rgba(244, 63, 94, 0.3); }
+.badge-store   { background: rgba(168, 85, 247, 0.15); color: #a855f7; border-color: rgba(168, 85, 247, 0.3); }
+.badge-compute { background: rgba(34, 197, 94, 0.15); color: #22c55e; border-color: rgba(34, 197, 94, 0.3); }
+.badge-consume { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border-color: rgba(245, 158, 11, 0.3); }
 
-    .pipeline-box:hover {
-      border-color: var(--cyan-glow);
-      box-shadow: 0 0 20px var(--cyan-glow);
-      transform: translateY(-5px);
-    }
+/* Stage Cards Layout */
+.stage-nodes {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
 
-    .pipeline-connector {
-      flex: 1;
-      height: 3px;
-      background: var(--border-color);
-      position: relative;
-      min-width: 30px;
-    }
+.node-card {
+  background: rgba(5, 8, 22, 0.85);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 0.8rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex: 1;
+  min-width: 140px;
+  max-width: 240px;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
 
-    .data-packet {
-      position: absolute;
-      top: -3px;
-      left: 0;
-      width: 9px;
-      height: 9px;
-      background: var(--cyan-glow);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--cyan-glow);
-      animation: packetFlow 2s infinite linear;
-    }
+.node-card:hover {
+  border-color: var(--cyan-glow);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.25);
+  transform: translateY(-3px);
+}
 
-    @keyframes packetFlow {
-      0% { left: 0%; }
-      100% { left: 100%; }
-    }
+.node-card i {
+  font-size: 1.4rem;
+  color: var(--cyan-glow);
+}
 
-    .conn-1 .data-packet { animation-delay: 0s; }
-    .conn-2 .data-packet { animation-delay: 0.3s; }
-    .conn-3 .data-packet { animation-delay: 0.6s; }
-    .conn-4 .data-packet { animation-delay: 0.9s; }
-    .conn-5 .data-packet { animation-delay: 1.2s; }
-    .conn-6 .data-packet { animation-delay: 1.5s; }
+.node-card span {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* Rotating Gear Animation for Ingestion/Processing */
+.spin-gear {
+  animation: rotateGear 4s linear infinite;
+  display: inline-block;
+  color: #f43f5e !important;
+}
+
+@keyframes rotateGear {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Queue Packets Visual */
+.queue-packets {
+  display: flex;
+  gap: 4px;
+}
+.packet-box {
+  width: 8px;
+  height: 14px;
+  border-radius: 2px;
+}
+.p-green  { background: #22c55e; box-shadow: 0 0 5px #22c55e; }
+.p-yellow { background: #f59e0b; box-shadow: 0 0 5px #f59e0b; }
+.p-cyan   { background: #00e5ff; box-shadow: 0 0 5px #00e5ff; }
+.p-red    { background: #f43f5e; box-shadow: 0 0 5px #f43f5e; }
+
+/* Connecting Lines & Flowing Data Streams */
+.connector-divider {
+  position: relative;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.connector-line-vertical {
+  width: 2px;
+  height: 100%;
+  background: rgba(30, 41, 59, 0.8);
+  position: relative;
+}
+
+.flowing-dot {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7px;
+  height: 7px;
+  background: var(--cyan-glow);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--cyan-glow);
+  animation: flowDown 1.8s infinite linear;
+}
+
+@keyframes flowDown {
+  0% { top: 0%; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.delay-1 { animation-delay: 0.4s; }
+.delay-2 { animation-delay: 0.8s; }
 
     /* ============================================================
        04. TECH STACK MARQUEE
@@ -803,47 +881,134 @@
     </header>
 
     <!-- LIVE ANIMATED DATA PIPELINE -->
-    <section class="pipeline-section">
-      <div class="section-title"><i class="fa-solid fa-diagram-project"></i> End-to-End Data Pipeline Architecture</div>
-      <div class="pipeline-container">
+    <!-- LIVE ANIMATED DATA PIPELINE (BYTEBYTEGO STYLE) -->
+<section class="pipeline-section">
+  <div class="section-title">
+    <i class="fa-solid fa-diagram-project"></i> End-to-End Enterprise Data Architecture
+  </div>
+  
+  <div class="pipeline-overview-wrapper">
+    <div class="pipeline-grid">
 
-        <div class="pipeline-step">
-          <div class="pipeline-box"><i class="fa-solid fa-database"></i><span>Raw Data</span></div>
+      <!-- STAGE 1: COLLECT -->
+      <div class="stage-row">
+        <div class="stage-badge badge-collect"><i class="fa-solid fa-download"></i> Collect</div>
+        <div class="stage-nodes">
+          <div class="node-card">
+            <i class="fa-solid fa-database"></i>
+            <span>Data Stores</span>
+          </div>
+          <div class="node-card">
+            <i class="fa-solid fa-wifi"></i>
+            <span>Data Streams</span>
+          </div>
+          <div class="node-card">
+            <i class="fa-solid fa-window-restore"></i>
+            <span>Applications</span>
+          </div>
         </div>
-        <div class="pipeline-connector conn-1"><div class="data-packet"></div></div>
-
-        <div class="pipeline-step">
-          <div class="pipeline-box"><i class="fa-solid fa-bolt"></i><span>Kafka</span></div>
-        </div>
-        <div class="pipeline-connector conn-2"><div class="data-packet"></div></div>
-
-        <div class="pipeline-step">
-          <div class="pipeline-box"><i class="fa-solid fa-fire"></i><span>Spark</span></div>
-        </div>
-        <div class="pipeline-connector conn-3"><div class="data-packet"></div></div>
-
-        <div class="pipeline-step">
-          <div class="pipeline-box"><i class="fa-solid fa-box-archive"></i><span>Bronze</span></div>
-        </div>
-        <div class="pipeline-connector conn-4"><div class="data-packet"></div></div>
-
-        <div class="pipeline-step">
-          <div class="pipeline-box"><i class="fa-solid fa-filter"></i><span>Silver</span></div>
-        </div>
-        <div class="pipeline-connector conn-5"><div class="data-packet"></div></div>
-
-        <div class="pipeline-step">
-          <div class="pipeline-box"><i class="fa-solid fa-gem"></i><span>Gold</span></div>
-        </div>
-        <div class="pipeline-connector conn-6"><div class="data-packet"></div></div>
-
-        <div class="pipeline-step">
-          <div class="pipeline-box"><i class="fa-solid fa-chart-line"></i><span>Power BI</span></div>
-        </div>
-
       </div>
-    </section>
 
+      <!-- FLOW CONNECTOR -->
+      <div class="connector-divider">
+        <div class="connector-line-vertical"><div class="flowing-dot"></div></div>
+      </div>
+
+      <!-- STAGE 2: INGEST -->
+      <div class="stage-row">
+        <div class="stage-badge badge-ingest"><i class="fa-solid fa-filter"></i> Ingest</div>
+        <div class="stage-nodes">
+          <div class="node-card" style="flex: 2; max-width: 500px;">
+            <i class="fa-solid fa-gear spin-gear"></i>
+            <span>Data Load</span>
+            <div style="border-left: 1px solid var(--border-color); height: 20px; margin: 0 0.5rem;"></div>
+            <i class="fa-solid fa-layer-group" style="color:#f59e0b"></i>
+            <span>Event Queue</span>
+            <div class="queue-packets">
+              <span class="packet-box p-green"></span>
+              <span class="packet-box p-yellow"></span>
+              <span class="packet-box p-cyan"></span>
+              <span class="packet-box p-red"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLOW CONNECTOR -->
+      <div class="connector-divider">
+        <div class="connector-line-vertical"><div class="flowing-dot delay-1"></div></div>
+      </div>
+
+      <!-- STAGE 3: STORE -->
+      <div class="stage-row">
+        <div class="stage-badge badge-store"><i class="fa-solid fa-box-archive"></i> Store</div>
+        <div class="stage-nodes">
+          <div class="node-card">
+            <i class="fa-solid fa-water"></i>
+            <span>Data Lake</span>
+          </div>
+          <div class="node-card">
+            <i class="fa-solid fa-warehouse"></i>
+            <span>Data Warehouse</span>
+          </div>
+          <div class="node-card">
+            <i class="fa-solid fa-server"></i>
+            <span>Data Lakehouse</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLOW CONNECTOR -->
+      <div class="connector-divider">
+        <div class="connector-line-vertical"><div class="flowing-dot delay-2"></div></div>
+      </div>
+
+      <!-- STAGE 4: COMPUTE -->
+      <div class="stage-row">
+        <div class="stage-badge badge-compute"><i class="fa-solid fa-microchip"></i> Compute</div>
+        <div class="stage-nodes">
+          <div class="node-card">
+            <i class="fa-solid fa-boxes-stacked"></i>
+            <span>Batch Processing</span>
+          </div>
+          <div class="node-card">
+            <i class="fa-solid fa-bolt"></i>
+            <span>Stream Processing</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLOW CONNECTOR -->
+      <div class="connector-divider">
+        <div class="connector-line-vertical"><div class="flowing-dot"></div></div>
+      </div>
+
+      <!-- STAGE 5: CONSUME -->
+      <div class="stage-row">
+        <div class="stage-badge badge-consume"><i class="fa-solid fa-chart-line"></i> Consume</div>
+        <div class="stage-nodes">
+          <div class="node-card">
+            <i class="fa-solid fa-atom"></i>
+            <span>Data Science</span>
+          </div>
+          <div class="node-card">
+            <i class="fa-solid fa-brain"></i>
+            <span>Business Intelligence</span>
+          </div>
+          <div class="node-card">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Self-Service Analytics</span>
+          </div>
+          <div class="node-card">
+            <i class="fa-solid fa-network-wired"></i>
+            <span>ML Services</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
     <!-- TECH STACK MARQUEE -->
     <div class="marquee-container">
       <div class="marquee-track">
